@@ -20,8 +20,10 @@ def get_unused_names_error_message(unused_names: Iterable[CodeItem], args: Args)
     messages = []
     for item in unused_names:
         if not args.only or _match(item.filename, args.only):
-            message = f'`{item.filename}`: \033[91m{item.error_code}\033[0m '
-            message += item.message or (f"`\033[1m{item.name}\033[0m` ")
+            message = f'`{item.filename}`: '
+            message += item.message or (
+                f"{item.type_.replace('_', ' ').capitalize()} " f"`\033[1m{item.name}\033[0m` " f"is never used "
+            )
             if item.name_line or item.name_column:
                 message += f"(line {item.name_line}, column {item.name_column}\\)"
             if args.no_color:
