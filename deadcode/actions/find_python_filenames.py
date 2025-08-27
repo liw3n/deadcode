@@ -31,6 +31,7 @@ def find_python_filenames(args: Args) -> List[str]:
     if args.verbose:
         sep = '\n  - '
         logger.info(f'Files to be checked for dead code: {sep.join(filenames)}')
+    
     return filenames
 
 
